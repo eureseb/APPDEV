@@ -32,4 +32,9 @@ public class CourseController {
 	public CourseEntity getCourseById(int id) {
 		return cserv.getCourseById(id);
 	}
+	
+	@GetMapping("/getCourseByCode")
+	public CourseEntity getCourseByCode(String code) {
+		return cserv.getCourseByCode(code);
+	}
 }
