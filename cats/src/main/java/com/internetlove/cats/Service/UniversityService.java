@@ -53,10 +53,10 @@ public class UniversityService {
 		String msg;
 		if(urepo.findById(id) != null) {
 			urepo.deleteById(id);
-			msg = "Course ID Number " + id + " is successfully deleted!";
+			msg = "University ID Number " + id + " is successfully deleted!";
 		}
 		else
-			msg = "Course ID Number " + id + " is not found!";
+			msg = "University ID Number " + id + " is not found!";
 		return msg;
 	}
 

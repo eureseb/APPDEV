@@ -33,7 +33,7 @@ public class UniversityController {
 		return userv.insertUniversity(university);
 	}
 	
-	@PutMapping("/putCourse")
+	@PutMapping("/putUniversity")
 	public UniversityEntity updateUniversity(@RequestParam int id, @RequestBody UniversityEntity university) throws Exception {
 		return userv.updateUniversity(id, university);
 	}
