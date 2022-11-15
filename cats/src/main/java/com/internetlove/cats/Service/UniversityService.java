@@ -4,10 +4,12 @@ import java.util.List;
 import java.util.NoSuchElementException;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.internetlove.cats.Repository.UniversityRepository;
 import com.internetlove.cats.Entity.UniversityEntity;
 
+@Service
 public class UniversityService {
 	@Autowired
 	UniversityRepository urepo;
@@ -27,7 +29,7 @@ public class UniversityService {
 	}
 	
 	//Update course
-	public UniversityEntity updateCourse(int id, UniversityEntity newUniversity) throws Exception {
+	public UniversityEntity updateUniversity(int id, UniversityEntity newUniversity) throws Exception {
 		UniversityEntity university = new UniversityEntity();
 		try {
 			//steps in updating
