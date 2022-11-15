@@ -7,5 +7,5 @@ import com.internetlove.cats.Entity.CourseEntity;
 
 @Repository
 public interface CourseRepository extends JpaRepository<CourseEntity, Integer>{
-	CourseEntity findByCode(String coursecode);
+	CourseEntity findByCode(String code);
 }
