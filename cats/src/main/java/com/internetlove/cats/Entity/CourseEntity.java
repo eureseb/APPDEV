@@ -9,7 +9,7 @@ import javax.persistence.Id;
 public class CourseEntity {
 	@Id
 	@GeneratedValue (strategy = GenerationType.IDENTITY)
-	private int courseid; //Auto-incremented id of the Course
+	private int id; //Auto-incremented id of the Course
 	private String coursecode;
 	private String coursedesc;
 	//private Set<TeacherEntity> teachers; //To be implemented
@@ -18,7 +18,7 @@ public class CourseEntity {
 	public CourseEntity() {}
 	public CourseEntity(int cid, String ccode, String cdesc) {
 		super();
-		courseid = cid;
+		id = cid;
 		coursecode = ccode;
 		coursedesc = cdesc;
 	}
