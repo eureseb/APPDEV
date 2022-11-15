@@ -13,7 +13,7 @@ public class CourseEntity {
 	@GeneratedValue (strategy = GenerationType.IDENTITY)
 	private int id; //Auto-incremented id of the Course
 	private String code;
-	private String desc;
+	private String coursedesc;
 	//private Set<TeacherEntity> teachers; //To be implemented
 	//private Set<StudentEntity> students; //To be implemented
 	
@@ -22,11 +22,11 @@ public class CourseEntity {
 		super();
 		id = cid;
 		code = ccode;
-		desc = cdesc;
+		coursedesc = cdesc;
 	}
 	
 	public String getCourseCode() {return code;}
-	public String getCourseDesc() {return desc;}
+	public String getCourseDesc() {return coursedesc;}
 	public void setCourseCode(String ccode) {code = ccode;}
-	public void setCourseDesc(String cdesc) {desc = cdesc;}
+	public void setCourseDesc(String cdesc) {coursedesc = cdesc;}
 }
