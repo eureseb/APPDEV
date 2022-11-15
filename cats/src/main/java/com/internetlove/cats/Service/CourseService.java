@@ -28,9 +28,9 @@ public class CourseService {
 		else
 			return null;
 	}
-	public CourseEntity getCourseByCode(String code) {
-		if(crepo.findByCode(code)!=null)
-			return crepo.findByCode(code);
+	public CourseEntity getCourseByCode(String coursecode) {
+		if(crepo.findByCode(coursecode)!=null)
+			return crepo.findByCode(coursecode);
 		else
 			return null;
 	}
