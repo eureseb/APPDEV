@@ -19,7 +19,8 @@ public class StudentService {
 
     public List<StudentEntity> getAllStudents(){ return studentRepository.findAll(); }
 
-    public StudentEntity getStudentById(int id){
+    public StudentEntity getStudentById(String studentId){
+        int id = Integer.parseInt(studentId);
         Optional<StudentEntity> result = studentRepository.findById(id);
         StudentEntity student;
         if(result.isPresent()){
@@ -35,31 +36,38 @@ public class StudentService {
         return studentRepository.save(student);
     }
 
-    public StudentEntity updateStudent(int id, StudentEntity updatedStudent) throws Exception {
-        StudentEntity student = new StudentEntity();
-        try {
-            student = studentRepository.findById(id).get();
+    public StudentEntity update(StudentEntity updatedStudent) {
 
+        Optional<StudentEntity> given = studentRepository.findById(updatedStudent.getId());
+
+        if(given.isPresent()){
+            StudentEntity student = given.get();
             student.setName(updatedStudent.getName());
             student.setContactNumber(updatedStudent.getContactNumber());
             student.setEmail(updatedStudent.getEmail());
             student.setDateEnrolled(updatedStudent.getDateEnrolled());
             student.setCourses(updatedStudent.getCourses());
-
             return studentRepository.save(student);
-        }catch(NoSuchElementException ex) {
-            throw new Exception("ID Number " + id + " does not exist!");
         }
+        return null;
     }
 
-    public String deleteById(int id) {
-        String msg;
-        if(studentRepository.findById(id).isPresent()) {
-            studentRepository.deleteById(id);
-            msg = "University ID Number " + id + " is successfully deleted!";
+    public String deleteById(String id){
+
+        StringBuilder sb = new StringBuilder();
+
+        StudentEntity student = this.getStudentById(id);
+
+        if(student != null){
+            studentRepository.deleteById(student.getId());
+            sb.append("Student deleted");
         }
-        else
-            msg = "University ID Number " + id + " is not found!";
-        return msg;
+        else {
+            sb.append("Student not found or already deleted");
+        }
+
+        return sb.toString();
     }
+
+
 }
