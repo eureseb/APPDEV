@@ -22,8 +22,8 @@ public class CourseEntity {
 	@Column(name = "course_code")
 	private String code;
 	
-	@Column(name = "course_description")
-	private String description;
+	@Column(name = "course_desc")
+	private String desc;
 	
 	//private Set<TeacherEntity> teachers; //To be implemented
 	
@@ -31,17 +31,17 @@ public class CourseEntity {
 	private Set<StudentEntity> students;
 	
 	public CourseEntity() {}
-	public CourseEntity(int id, String code, String description) {
+	public CourseEntity(int id, String code, String desc) {
 		super();
 		this.id = id;
 		this.code = code;
-		this.description = description;
+		this.desc = desc;
 	}
 	
 	public String getCourseCode() {return code;}
-	public String getCourseDesc() {return description;}
+	public String getCourseDesc() {return desc;}
 	public Set<StudentEntity> getStudents() {return students;}
 	public void setCourseCode(String code) {this.code = code;}
-	public void setCourseDesc(String desc) {this.description = desc;}
+	public void setCourseDesc(String desc) {this.desc = desc;}
 	public void setStudent(Set<StudentEntity> students) {this.students = students;}
 }
