@@ -2,31 +2,46 @@ package com.internetlove.cats.Entity;
 
 import java.util.Set;
 
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
 
 @Entity
+@Table(name = "course")
 public class CourseEntity {
 	@Id
 	@GeneratedValue (strategy = GenerationType.IDENTITY)
-	private int id; //Auto-incremented id of the Course
+	@Column(name = "id")
+	private int id;
+	
+	@Column(name = "coursecode")
 	private String code;
-	private String description;
+	
+	@Column(name = "coursedesc")
+	private String desc;
+	
 	//private Set<TeacherEntity> teachers; //To be implemented
-	//private Set<StudentEntity> students; //To be implemented
+	
+	@OneToMany(cascade = CascadeType.MERGE)
+	private Set<StudentEntity> students;
 	
 	public CourseEntity() {}
-	public CourseEntity(int cid, String ccode, String cdesc) {
+	public CourseEntity(int id, String code, String desc) {
 		super();
-		id = cid;
-		code = ccode;
-		description = cdesc;
+		this.id = id;
+		this.code = code;
+		this.desc = desc;
 	}
 	
 	public String getCourseCode() {return code;}
-	public String getCourseDesc() {return description;}
-	public void setCourseCode(String ccode) {code = ccode;}
-	public void setCourseDesc(String cdesc) {description = cdesc;}
+	public String getCourseDesc() {return desc;}
+	public Set<StudentEntity> getStudents() {return students;}
+	public void setCourseCode(String code) {this.code = code;}
+	public void setCourseDesc(String desc) {this.desc = desc;}
+	public void setStudent(Set<StudentEntity> students) {this.students = students;}
 }
