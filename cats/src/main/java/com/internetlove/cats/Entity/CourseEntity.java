@@ -19,10 +19,10 @@ public class CourseEntity {
 	@Column(name = "id")
 	private int id;
 	
-	@Column(name = "course_code")
+	@Column(name = "coursecode")
 	private String code;
 	
-	@Column(name = "course_desc")
+	@Column(name = "coursedesc")
 	private String desc;
 	
 	//private Set<TeacherEntity> teachers; //To be implemented
