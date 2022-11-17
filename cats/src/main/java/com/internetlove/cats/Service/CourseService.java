@@ -37,8 +37,30 @@ public class CourseService {
 	}
 	
 	//Update
-	//public CourseEntity putCourse() {}
+	public CourseEntity putCourse(int courseid, CourseEntity newCourseDetails) throws Exception {
+		CourseEntity course = new CourseEntity();
+		
+		try {
+			course = crepo.findById(courseid).get();
+			
+			course.setCourseDesc(newCourseDetails.getCourseDesc());
+			
+			return crepo.save(course);
+		}catch (NoSuchElementException nex) {
+			throw new Exception("Course ID Number "+courseid+" does not exist!");
+		}
+	}
 	
 	//Delete
-	//public CourseEntity deleteCourse() {}
+	public String deleteCourse(int courseid) {
+		String msg;
+		if(crepo.findById(courseid) != null) {
+			crepo.deleteById(courseid);
+			
+			msg = "Course ID Number "+courseid+" is successfully deleted";
+		}else
+			msg = "Course ID Number "+courseid+" is NOT found";
+		
+		return msg;
+	}
 }
