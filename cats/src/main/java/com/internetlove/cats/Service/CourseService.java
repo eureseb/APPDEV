@@ -52,5 +52,15 @@ public class CourseService {
 	}
 	
 	//Delete
-	//public CourseEntity deleteCourse() {}
+	public String deleteCourse(int courseid) {
+		String msg;
+		if(crepo.findById(courseid) != null) {
+			crepo.deleteById(courseid);
+			
+			msg = "Course ID Number "+courseid+" is successfully deleted";
+		}else
+			msg = "Course ID Number "+courseid+" is NOT found";
+		
+		return msg;
+	}
 }
