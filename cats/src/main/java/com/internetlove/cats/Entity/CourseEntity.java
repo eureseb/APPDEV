@@ -43,4 +43,5 @@ public class CourseEntity {
 	public Set<StudentEntity> getStudents() {return students;}
 	public void setCourseCode(String code) {this.code = code;}
 	public void setCourseDesc(String desc) {this.description = desc;}
+	public void setStudent(Set<StudentEntity> students) {this.students = students;}
 }
