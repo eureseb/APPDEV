@@ -1,9 +1,14 @@
 package com.internetlove.cats.Entity;
 
+import java.util.Set;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -16,22 +21,27 @@ public class UniversityEntity {
 	private String details;
 	private String dateAdded;
 	
-	//Constructors
-	//@OneToMany(cascade = CascadeType.MERGE)
-	//@JoinColumn(name = "userid")
+	
+	@OneToMany(cascade = CascadeType.MERGE)
+	@JoinColumn(name = "university_id")
+	private Set<StudentEntity> students;
+	
 	//private Set<CourseEntity> courses;
 	//private Set<TeacherEntity> teachers;
 	//private Set<StudentEntity> students;
+	
+	//Constructors
 	public UniversityEntity() {}
 	
-	public UniversityEntity(int id, String name, String details, String dateAdded) {
+	public UniversityEntity(int id, String name, String details, String dateAdded, Set<StudentEntity> students) {
 		super();
 		this.id = id;
 		this.name = name;
 		this.details = details;
 		this.dateAdded = dateAdded;
+		this.students = students;
 	}
-	
+
 	//Getters and Setters
 	public int getId() {
 		return id;
@@ -65,4 +75,12 @@ public class UniversityEntity {
 		this.dateAdded = dateAdded;
 	}
 
+	public Set<StudentEntity> getStudents() {
+		return students;
+	}
+
+	public void setStudents(Set<StudentEntity> students) {
+		this.students = students;
+	}
+	
 }

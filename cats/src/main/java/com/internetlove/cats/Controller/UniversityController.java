@@ -23,22 +23,22 @@ public class UniversityController {
 	@Autowired
 	UniversityService userv;
 	
-	@GetMapping("/getAllUniversities")
+	@GetMapping("") 
 	public List<UniversityEntity> getAllUniversities(){
 		return userv.getUniversities();
 	}
 	
-	@PostMapping("postUniversity")
+	@PostMapping("")
 	public UniversityEntity postUniversity(@RequestBody UniversityEntity university) {
 		return userv.insertUniversity(university);
 	}
 	
-	@PutMapping("/putUniversity")
+	@PutMapping("")
 	public UniversityEntity updateUniversity(@RequestParam int id, @RequestBody UniversityEntity university) throws Exception {
 		return userv.updateUniversity(id, university);
 	}
 	
-	@DeleteMapping("/deleteUniversity/{id}")
+	@DeleteMapping("{id}")
 	public String deleteUniversity(@PathVariable int id) {
 		return userv.deleteUniversity(id);
 	}
