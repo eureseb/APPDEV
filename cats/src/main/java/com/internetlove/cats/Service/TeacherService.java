@@ -1,4 +1,4 @@
-package com.db.teacher.Service;
+package com.internetlove.cats.Service;
 
 import java.util.List;
 import java.util.NoSuchElementException;
@@ -7,8 +7,9 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.db.teacher.Entity.TeacherEntity;
-import com.db.teacher.Repository.TeacherRepository;
+import com.internetlove.cats.Entity.TeacherEntity;
+import com.internetlove.cats.Repository.TeacherRepository;
+
 
 @Service
 public class TeacherService {
@@ -23,14 +24,7 @@ public class TeacherService {
 	public List<TeacherEntity> getAllTeachers(){
 		return trepo.findAll();
 	}
-	
-	public TeacherEntity findByName(String name) {
-		if(trepo.findByName(name)!=null)
-			return trepo.findByName(name);
-		else
-			return null;
-	}
-	
+
 	public Optional<TeacherEntity> findByTeacherId(int teacherid) {
 		if (trepo.findById(teacherid)!=null)
 			return trepo.findById(teacherid);
@@ -42,7 +36,8 @@ public class TeacherService {
 		TeacherEntity teacher = new TeacherEntity();
 		try {
 			teacher = trepo.findById(teacherid).get();
-			teacher.setName(newTeacherDetails.getName());
+			teacher.setFirstname(newTeacherDetails.getFirstname());
+			teacher.setLastname(newTeacherDetails.getLastname());
 			teacher.setContactNumber(newTeacherDetails.getContactNumber());
 			teacher.setCourse(newTeacherDetails.getCourse());
 			

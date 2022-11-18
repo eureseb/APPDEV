@@ -1,4 +1,4 @@
-package com.db.teacher.Entity;
+package com.internetlove.cats.Entity;
 
 
 import javax.persistence.Entity;
@@ -15,7 +15,8 @@ public class TeacherEntity {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int teacherid;
 	
-	private String name;
+	private String firstname;
+	private String lastname;
 	private String contactNumber;
 	private String gender;
 	private String course;
@@ -25,12 +26,13 @@ public class TeacherEntity {
 		
 	}
 
-	public TeacherEntity(int teacherid, String name, String contactNumber, String gender, String course) {
+	public TeacherEntity(int teacherid, String firstname, String lastname, String gender, String contactNumber, String course) {
 		super();
 		this.teacherid = teacherid;
-		this.name = name;
-		this.contactNumber = contactNumber;
+		this.firstname = firstname;
+		this.lastname = lastname;
 		this.gender = gender;
+		this.contactNumber = contactNumber;
 		this.course = course;
 	}
 
@@ -42,12 +44,20 @@ public class TeacherEntity {
 		this.teacherid = teacherid;
 	}
 
-	public String getName() {
-		return name;
+	public String getFirstname() {
+		return firstname;
 	}
 
-	public void setName(String name) {
-		this.name = name;
+	public void setFirstname(String firstname) {
+		this.firstname = firstname;
+	}
+
+	public String getLastname() {
+		return lastname;
+	}
+
+	public void setLastname(String lastname) {
+		this.lastname = lastname;
 	}
 
 	public String getContactNumber() {
@@ -73,6 +83,5 @@ public class TeacherEntity {
 	public void setCourse(String course) {
 		this.course = course;
 	}
-	
-	
+
 }
