@@ -1,9 +1,9 @@
-package com.db.teacher.Repository;
+package com.internetlove.cats.Repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import com.db.teacher.Entity.TeacherEntity;
+import com.internetlove.cats.Entity.TeacherEntity;
 
 @Repository
 	public interface TeacherRepository extends JpaRepository<TeacherEntity, Integer>{
