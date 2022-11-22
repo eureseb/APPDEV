@@ -26,20 +26,25 @@ public class UniversityEntity {
 	@JoinColumn(name = "university_id")
 	private Set<StudentEntity> students;
 	
-	//private Set<CourseEntity> courses;
+	@OneToMany(cascade = CascadeType.MERGE)
+	@JoinColumn(name = "id")
+	private Set<CourseEntity> courses;
+	
 	//private Set<TeacherEntity> teachers;
 	//private Set<StudentEntity> students;
 	
 	//Constructors
 	public UniversityEntity() {}
-	
-	public UniversityEntity(int id, String name, String details, String dateAdded, Set<StudentEntity> students) {
+
+	public UniversityEntity(int id, String name, String details, String dateAdded, Set<StudentEntity> students,
+			Set<CourseEntity> courses) {
 		super();
 		this.id = id;
 		this.name = name;
 		this.details = details;
 		this.dateAdded = dateAdded;
 		this.students = students;
+		this.courses = courses;
 	}
 
 	//Getters and Setters
@@ -82,5 +87,14 @@ public class UniversityEntity {
 	public void setStudents(Set<StudentEntity> students) {
 		this.students = students;
 	}
+
+	public Set<CourseEntity> getCourses() {
+		return courses;
+	}
+
+	public void setCourses(Set<CourseEntity> courses) {
+		this.courses = courses;
+	}
+	
 	
 }
