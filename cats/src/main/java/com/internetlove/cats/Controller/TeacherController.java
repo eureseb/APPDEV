@@ -1,4 +1,4 @@
-package com.db.teacher.Controller;
+package com.internetlove.cats.Controller;
 
 import java.util.List;
 import java.util.Optional;
@@ -14,8 +14,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.db.teacher.Entity.TeacherEntity;
-import com.db.teacher.Service.TeacherService;
+import com.internetlove.cats.Entity.TeacherEntity;
+import com.internetlove.cats.Service.TeacherService;
 
 @RestController
 @RequestMapping("/teacher")
