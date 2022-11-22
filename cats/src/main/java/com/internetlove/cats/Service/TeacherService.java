@@ -1,4 +1,4 @@
-package com.db.teacher.Service;
+package com.internetlove.cats.Service;
 
 import java.util.List;
 import java.util.NoSuchElementException;
@@ -7,8 +7,8 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.db.teacher.Entity.TeacherEntity;
-import com.db.teacher.Repository.TeacherRepository;
+import com.internetlove.cats.Entity.TeacherEntity;
+import com.internetlove.cats.Repository.TeacherRepository;
 
 @Service
 public class TeacherService {

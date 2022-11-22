@@ -1,4 +1,4 @@
-package com.db.teacher.Entity;
+package com.internetlove.cats.Entity;
 
 
 import javax.persistence.Entity;
