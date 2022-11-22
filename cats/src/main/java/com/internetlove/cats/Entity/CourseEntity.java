@@ -26,7 +26,7 @@ public class CourseEntity {
 	private String desc;
 	
 	@OneToMany(cascade = CascadeType.MERGE)
-	private Set<TeacherEntity> teachers; //To be implemented
+	private Set<TeacherEntity> teachers;
 	
 	@OneToMany(cascade = CascadeType.MERGE)
 	private Set<StudentEntity> students;
