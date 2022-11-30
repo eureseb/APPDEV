@@ -42,7 +42,9 @@ public class StudentService {
 
         if(given.isPresent()){
             StudentEntity student = given.get();
-            student.setName(updatedStudent.getName());
+            student.setFirstName(updatedStudent.getFirstName());
+            student.setMiddleName(updatedStudent.getMiddleName());
+            student.setLastName(updatedStudent.getLastName());
             student.setContactNumber(updatedStudent.getContactNumber());
             student.setEmail(updatedStudent.getEmail());
             student.setDateEnrolled(updatedStudent.getDateEnrolled());
