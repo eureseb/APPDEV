@@ -15,6 +15,7 @@ public class StudentController {
     @Autowired
     StudentService studentService;
 
+    @GetMapping
     public List<StudentEntity> all(){
         return studentService.getAllStudents();
     }
