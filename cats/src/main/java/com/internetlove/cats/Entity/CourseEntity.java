@@ -40,7 +40,7 @@ public class CourseEntity {
 		this.code = code;
 		this.desc = desc;
 	}
-	
+
 	public String getCourseCode() {return code;}
 	public String getCourseDesc() {return desc;}
 	public Set<StudentEntity> getStudents() {return students;}
