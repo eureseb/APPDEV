@@ -9,6 +9,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -28,7 +29,7 @@ public class CourseEntity {
 	@OneToMany(cascade = CascadeType.MERGE)
 	private Set<TeacherEntity> teachers;
 	
-	@OneToMany(cascade = CascadeType.MERGE)
+	@ManyToMany(cascade = CascadeType.MERGE)
 	private Set<StudentEntity> students;
 	
 	public CourseEntity() {}
