@@ -1,6 +1,9 @@
 package com.internetlove.cats.Entity;
 
 import javax.persistence.*;
+import java.util.Date;
+import java.util.List;
+import java.util.Objects;
 
 @Entity
 @Table(name = "student")
@@ -8,17 +11,24 @@ public class StudentEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    private String name;
+    private String firstName;
+    private String middleName;
+    private String lastName;
     private String contactNumber;
     private String email;
-    private String dateEnrolled;
-    private String courses;
+    private Date dateEnrolled;
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name = "course_id", referencedColumnName = "id")
+    private List<CourseEntity> courses;
 
     public StudentEntity() {
     }
-    public StudentEntity(int id, String name, String contactNumber, String email, String dateEnrolled, String courses) {
+
+    public StudentEntity(int id, String firstName, String middleName, String lastName, String contactNumber, String email, Date dateEnrolled, List<CourseEntity> courses) {
         this.id = id;
-        this.name = name;
+        this.firstName = firstName;
+        this.middleName = middleName;
+        this.lastName = lastName;
         this.contactNumber = contactNumber;
         this.email = email;
         this.dateEnrolled = dateEnrolled;
@@ -29,12 +39,28 @@ public class StudentEntity {
         return id;
     }
 
-    public String getName() {
-        return name;
+    public String getFirstName() {
+        return firstName;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public String getMiddleName() {
+        return middleName;
+    }
+
+    public void setMiddleName(String middleName) {
+        this.middleName = middleName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
     }
 
     public String getContactNumber() {
@@ -53,19 +79,19 @@ public class StudentEntity {
         this.email = email;
     }
 
-    public String getDateEnrolled() {
+    public Date getDateEnrolled() {
         return dateEnrolled;
     }
 
-    public void setDateEnrolled(String dateEnrolled) {
+    public void setDateEnrolled(Date dateEnrolled) {
         this.dateEnrolled = dateEnrolled;
     }
 
-    public String getCourses() {
+    public List<CourseEntity> getCourses() {
         return courses;
     }
 
-    public void setCourses(String courses) {
+    public void setCourses(List<CourseEntity> courses) {
         this.courses = courses;
     }
 
@@ -73,11 +99,13 @@ public class StudentEntity {
     public String toString() {
         return "StudentEntity{" +
                 "id=" + id +
-                ", name='" + name + '\'' +
+                ", firstName='" + firstName + '\'' +
+                ", middleName='" + middleName + '\'' +
+                ", lastName='" + lastName + '\'' +
                 ", contactNumber='" + contactNumber + '\'' +
                 ", email='" + email + '\'' +
-                ", dateEnrolled='" + dateEnrolled + '\'' +
-                ", courses='" + courses + '\'' +
+                ", dateEnrolled=" + dateEnrolled +
+                ", courses=" + courses +
                 '}';
     }
 }
