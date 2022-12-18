@@ -8,8 +8,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -26,7 +26,7 @@ public class CourseEntity {
 	@Column(name = "coursedesc")
 	private String desc;
 	
-	@OneToMany(cascade = CascadeType.MERGE)
+	@ManyToMany(cascade = CascadeType.MERGE)
 	private Set<TeacherEntity> teachers;
 	
 	@ManyToMany(cascade = CascadeType.MERGE)
@@ -39,7 +39,8 @@ public class CourseEntity {
 		this.code = code;
 		this.desc = desc;
 	}
-
+	
+	public int getId() {return id;}
 	public String getCourseCode() {return code;}
 	public String getCourseDesc() {return desc;}
 	public Set<StudentEntity> getStudents() {return students;}
