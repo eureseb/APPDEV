@@ -2,11 +2,13 @@ package com.internetlove.cats.Service;
 
 import java.util.List;
 import java.util.NoSuchElementException;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.internetlove.cats.Repository.UniversityRepository;
+import com.internetlove.cats.Entity.StudentEntity;
 import com.internetlove.cats.Entity.UniversityEntity;
 
 @Service
@@ -19,6 +21,16 @@ public class UniversityService {
 		return urepo.findAll();
 	}
 	
+	//Find by id
+	public UniversityEntity getUniversityById(int id) {
+		Optional<UniversityEntity> result = urepo.findById(id);
+		UniversityEntity university;
+		if(result.isPresent())
+			university = result.get();
+		else
+			throw new RuntimeException();
+		return university;
+	}
 	//Find by name
 	//Find by details
 	//Find by date
@@ -51,12 +63,12 @@ public class UniversityService {
 	//Delete university
 	public String deleteUniversity(int id) {
 		String msg;
-		if(urepo.findById(id) != null) {
+		if(urepo.findById(id).isEmpty()) 
+			msg = "University ID Number " + id + " is not found!";
+		else {
 			urepo.deleteById(id);
 			msg = "University ID Number " + id + " is successfully deleted!";
 		}
-		else
-			msg = "University ID Number " + id + " is not found!";
 		return msg;
 	}
 
