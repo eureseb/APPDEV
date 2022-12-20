@@ -1,0 +1,25 @@
+.Table {
+    margin: 25px;
+}
+
+.Table-thead {
+    background-color: #767676;
+    align-items: center;
+    justify-content: center;
+    text-align: left;
+    padding: 50px;
+    margin: 100px;
+    font-size: calc(10px + 2vmin);
+    color: white;
+}
+
+.Table-tdata {
+    background-color: #969696;
+    align-items: center;
+    justify-content: center;
+    text-align: left;
+    padding: 50px;
+    margin: 100px;
+    font-size: calc(10px + 2vmin);
+    color: white;
+}
