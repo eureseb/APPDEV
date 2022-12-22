@@ -10,6 +10,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -32,6 +33,9 @@ public class CourseEntity {
 	@ManyToMany(cascade = CascadeType.MERGE)
 	private Set<StudentEntity> students;
 	
+	@OneToOne
+	private UniversityEntity university;
+	
 	public CourseEntity() {}
 	public CourseEntity(int id, String code, String desc) {
 		super();
@@ -45,8 +49,10 @@ public class CourseEntity {
 	public String getCourseDesc() {return desc;}
 	public Set<StudentEntity> getStudents() {return students;}
 	public Set<TeacherEntity> getTeachers() {return teachers;}
+	public UniversityEntity getUniversity() {return university;}
 	public void setCourseCode(String code) {this.code = code;}
 	public void setCourseDesc(String desc) {this.desc = desc;}
 	public void setStudent(Set<StudentEntity> students) {this.students = students;}
 	public void setTeacher(Set<TeacherEntity> teachers) {this.teachers = teachers;}
+	public void setUniversity(UniversityEntity university) {this.university = university;}
 }

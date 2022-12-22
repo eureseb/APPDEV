@@ -85,6 +85,7 @@ function GetService() {
           <th className='Table-thead'>DESCRIPTION</th>
           <th className='Table-thead'>TEACHERS</th>
           <th className='Table-thead'>STUDENTS</th>
+          <th className='Table-thead'>UNIVERSITY ID</th>
         </tr>
         {rawdata.map((c,key) =>
           <tr key={key} className='Table-tdata'>
@@ -97,6 +98,7 @@ function GetService() {
             <td className="Table-tdata">{c.students.map((s,key) =>
               <li key={key}>{s.firstName} {s.middleName} {s.lastName}</li>
             )}</td>
+            <td className="Table-tdata">{c.university.name}</td>
           </tr>
         )}
       </table>
