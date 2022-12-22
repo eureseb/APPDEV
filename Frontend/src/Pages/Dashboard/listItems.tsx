@@ -38,13 +38,19 @@ export const mainListItems = (
       <ListItemIcon>
         <PeopleIcon />
       </ListItemIcon>
-      <ListItemText primary="Students" />
+      <ListItemText primary="Students" onClick={(e) => {
+                e.preventDefault();
+                window.location.href='http://localhost:3000/student';
+                }}/>
     </ListItemButton>
     <ListItemButton>
       <ListItemIcon>
         <AssignmentIcon />
       </ListItemIcon>
-      <ListItemText primary="Teachers" />
+      <ListItemText primary="Teachers" onClick={(e) => {
+                e.preventDefault();
+                window.location.href='http://localhost:3000/teacher';
+                }}/>
     </ListItemButton>
     <ListItemButton>
       <ListItemIcon>

@@ -2,13 +2,14 @@ import { SettingsBackupRestoreSharp } from "@mui/icons-material";
 import axios, { AxiosRequestConfig } from "axios";
 import { createContext, useEffect, useState } from "react";
 
-export interface IUniversity{
+export interface IStudent{
     id:string,
-    name:string,
-    details:string,
-    dateAdded:string,
-    lastUpdated:string,
-    hours:string
+    fname:string,
+    mname:string,
+    lname:string,
+    email:string,
+    cn:string,
+    uid:string
 }
 
 interface IUser{
@@ -39,18 +40,18 @@ interface IStatistics{
     universityCount:number
 }
 
-interface RestContextDoer {
+interface RestStudentContextDoer {
     getUser: (config: AxiosRequestConfig<any>)=>void,
     setSuccess:React.Dispatch<React.SetStateAction<boolean>>
     postUser:(iuser: IUser)=> void
     getStatistics:(config: AxiosRequestConfig<any>)=>void, 
-    putUniversity: (iuser: IUniversity)=>void,
+    putStudent: (iuser: IStudent)=>void,
     sendRequestUni:(config: AxiosRequestConfig<any>)=>void, 
-    deleteUniversity: (id: string)=> void, 
-    postUniversity: (iuser: IUniversity)=> void, 
+    deleteStudent: (id: string)=> void, 
+    postStudent: (iuser: IStudent)=> void, 
     setRenderer:React.Dispatch<React.SetStateAction<boolean>>,
     deleted: string,
-    uniData: IUniversity[] | undefined, 
+    uniData: IStudent[] | undefined, 
     error: string, 
     loading: boolean, 
     success: boolean,
@@ -62,10 +63,10 @@ interface RestContextDoer {
     users: IUserFullDetails[] | undefined
 }
 
-export const RestContext = createContext<RestContextDoer | null>(null);
+export const RestStudentContext = createContext<RestStudentContextDoer | null>(null);
 
-export default function RestContextProvider(props:{children:React.ReactNode}){
-    const [uniData,setUniData] = useState<IUniversity[]>();
+export default function RestStudentContextProvider(props:{children:React.ReactNode}){
+    const [uniData,setUniData] = useState<IStudent[]>();
     const [statistics,setStatistics] = useState<IStatistics>();
     const [renderer,setRenderer] = useState(false);
     const [success,setSuccess] = useState(false);
@@ -90,12 +91,12 @@ export default function RestContextProvider(props:{children:React.ReactNode}){
         .finally(()=>setLoading(false))
     }
 
-    function deleteUniversity(id:string){
+    function deleteStudent(id:string){
         setLoading(true);
-        axios.delete("http://localhost:8080/university/"+id)
+        axios.delete("http://localhost:8080/students/"+id)
         .then((response)=>{
             setDeleted(response.data)
-            if(response.data == "University ID Number " + id + " is not found!")
+            if(response.data == "Student not found or already deleted")
                 setSuccess(false)
             else
                 setSuccess(true)         
@@ -110,19 +111,23 @@ export default function RestContextProvider(props:{children:React.ReactNode}){
       
     }
 
-    function postUniversity(iuser:IUniversity){
+    function postStudent(iuser:IStudent){
         setLoading(true);
-        axios.post("http://localhost:8080/university",{
-            name:iuser.name,
-            details:iuser.details
+        axios.post("http://localhost:8080/students",{
+            firstName:iuser.fname,
+            middleName:iuser.mname,
+            lastName:iuser.lname,
+            email:iuser.email,
+            contactNumber:iuser.cn,
+            uniId:iuser.uid
         }
         )
         .then((response)=>{
-           setPost("A new university has been added");
+           setPost("A new student has been added");
            setSuccess(true)
         })
         .catch((error)=>{
-            setPost("Failed to add new university")
+            setPost("Failed to add new student")
             setError(error.message);
             setSuccess(false)
         })
@@ -131,19 +136,22 @@ export default function RestContextProvider(props:{children:React.ReactNode}){
         })
     }
 
-    function putUniversity(iuser:IUniversity){
+    function putStudent(iuser:IStudent){
         setLoading(true);
-        axios.put("http://localhost:8080/university?id="+iuser.id,{
-            name:iuser.name,
-            details:iuser.details
+        axios.put("http://localhost:8080/students?id="+iuser.id,{
+          firstName:iuser.fname,
+          middleName:iuser.mname,
+          lastName:iuser.lname,
+          email:iuser.email,
+          contactNumber:iuser.cn
         }
         )
         .then((response)=>{
-           setPut("Successfully updated University ID: "+iuser.id)
+           setPut("Successfully updated Student ID: "+iuser.id)
            setSuccess(true)
         })
         .catch((error)=>{
-            setPut("University ID: "+iuser.id+" does not exist")
+            setPut("Student ID: "+iuser.id+" does not exist")
             setError(error.message);
             setSuccess(false)
         })
@@ -202,11 +210,11 @@ export default function RestContextProvider(props:{children:React.ReactNode}){
     }
     
     return(
-        <RestContext.Provider value={{getUser, setSuccess, postUser, getStatistics, putUniversity,
-            sendRequestUni, deleteUniversity,
-            postUniversity,setRenderer,deleted,uniData,error,loading,success,renderer,post,put,
+        <RestStudentContext.Provider value={{getUser, setSuccess, postUser, getStatistics, putStudent,
+            sendRequestUni, deleteStudent, 
+            postStudent,setRenderer,deleted,uniData,error,loading,success,renderer,post,put,
             statistics, user, users}}>
             {props.children}
-        </RestContext.Provider>  
+        </RestStudentContext.Provider>  
     );
 }

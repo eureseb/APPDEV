@@ -14,6 +14,10 @@ import DeleteService from './Services/delete/DeleteService';
 import DashboardTemplate from './Pages/DashboardTemplate';
 import Home from './Services/Home';
 import { Grid } from '@mui/material';
+import Signup from './Pages/Signup/Signup';
+import Teacher from './Pages/Teacher/Teacher';
+import Student from './Pages/Student/Student';
+import RestStudentContextProvider from './Components/Helpers/RestStudentContext';
 
 function App() {
     return(
@@ -40,11 +44,20 @@ function App() {
           </DashboardTemplate>
         </Router>
     </Route>
-    <Route exact path="/GetCourse">
-        <div className="App-body">
-          <NavBar/>
-            <GetService/> 
-        </div>
+    <Route path="/signup">
+      <RestContextProvider>
+        <Signup/>
+      </RestContextProvider>
+    </Route>
+    <Route path="/teacher">
+      <RestContextProvider>
+        <Teacher/>
+      </RestContextProvider>
+    </Route>
+    <Route path="/student">
+      <RestStudentContextProvider>
+        <Student/>
+      </RestStudentContextProvider>
     </Route>
     <Route path="/dashboard">
         <RestContextProvider>

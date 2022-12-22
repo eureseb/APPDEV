@@ -1,6 +1,7 @@
 package com.internetlove.cats.Controller;
 
 import com.internetlove.cats.Entity.StudentEntity;
+import com.internetlove.cats.Entity.UniversityEntity;
 import com.internetlove.cats.Service.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
@@ -8,6 +9,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+@CrossOrigin(origins = "http://localhost:3000")
 @RestController
 @RequestMapping("/students")
 public class StudentController {
@@ -32,12 +34,12 @@ public class StudentController {
     }
 
     @DeleteMapping("/{id}")
-    public String delete(@PathVariable String id){
+    public String delete(@PathVariable int id){
         return studentService.deleteById(id);
     }
 
-    @PutMapping()
-    public StudentEntity update(@Validated @RequestBody StudentEntity studentEntity){
-        return studentService.update(studentEntity);
+    @PutMapping("")
+    public StudentEntity update(@RequestParam int id, @RequestBody StudentEntity student) throws Exception{
+        return studentService.update(id,student);
     }
 }

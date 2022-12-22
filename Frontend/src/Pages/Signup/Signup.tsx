@@ -4,6 +4,7 @@ import CSS from 'csstype';
 import { useContext, useEffect, useState } from "react";
 import { RestContext } from "../../Components/Helpers/RestContext";
 import LoginPaper from "../../Components/Papers/LoginPaper";
+import SignupPaper from "../../Components/Papers/SignupPaper";
 import SnackbarComp from "../../Components/Snackbar/SnackbarComp";
 
 const mdTheme = createTheme();
@@ -32,6 +33,7 @@ export default function Login(){
         else    
             setCode(1)
     },[rest?.success])
+
     return(
         <ThemeProvider theme={mdTheme}>
             <Box component="main"
@@ -45,14 +47,15 @@ export default function Login(){
                         transform: 'translate(-50%, -50%)'
                     }}
                     >
-                    <LoginPaper setOpen={setOpen} open={open}/>
+                    <SignupPaper setOpen={setOpen} open={open}/>
+                    
                 </div>
                 <SnackbarComp 
                         setOpen={setOpen}
                         open={open}
                         code={code} 
-                        successMessage={'Login success!'} 
-                        errorMessage={'Login failed!'}/>
+                        successMessage={'Sign up success!'} 
+                        errorMessage={'Sign up failed!'}/>
             </Box>
         </ThemeProvider>
     );
