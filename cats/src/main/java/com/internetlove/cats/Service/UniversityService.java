@@ -51,12 +51,14 @@ public class UniversityService {
 	//Delete university
 	public String deleteUniversity(int id) {
 		String msg;
-		if(urepo.findById(id) != null) {
+		if(urepo.findById(id).isEmpty()) {
+			msg = "University ID Number " + id + " is not found!";
+		}
+		else {
 			urepo.deleteById(id);
 			msg = "University ID Number " + id + " is successfully deleted!";
 		}
-		else
-			msg = "University ID Number " + id + " is not found!";
+			
 		return msg;
 	}
 

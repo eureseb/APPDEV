@@ -9,7 +9,10 @@ import org.springframework.stereotype.Service;
 
 import com.internetlove.cats.Entity.TeacherEntity;
 import com.internetlove.cats.Repository.TeacherRepository;
+<<<<<<< HEAD
 
+=======
+>>>>>>> 9a99ad9b687e4befe765617d1b5e8ecbbd0c7387
 
 @Service
 public class TeacherService {

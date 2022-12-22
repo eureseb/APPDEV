@@ -16,7 +16,10 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.internetlove.cats.Entity.TeacherEntity;
 import com.internetlove.cats.Service.TeacherService;
+<<<<<<< HEAD
 
+=======
+>>>>>>> 9a99ad9b687e4befe765617d1b5e8ecbbd0c7387
 
 @RestController
 @RequestMapping("/teacher")

@@ -35,39 +35,40 @@ public class StudentService {
     public StudentEntity insertStudent(StudentEntity student){
         return studentRepository.save(student);
     }
-
-    public StudentEntity update(StudentEntity updatedStudent) {
-
-        Optional<StudentEntity> given = studentRepository.findById(updatedStudent.getId());
-
-        if(given.isPresent()){
-            StudentEntity student = given.get();
-            student.setName(updatedStudent.getName());
-            student.setContactNumber(updatedStudent.getContactNumber());
-            student.setEmail(updatedStudent.getEmail());
-            student.setDateEnrolled(updatedStudent.getDateEnrolled());
-            student.setCourses(updatedStudent.getCourses());
-            return studentRepository.save(student);
-        }
-        return null;
-    }
-
-    public String deleteById(String id){
-
-        StringBuilder sb = new StringBuilder();
-
-        StudentEntity student = this.getStudentById(id);
-
-        if(student != null){
-            studentRepository.deleteById(student.getId());
-            sb.append("Student deleted");
-        }
-        else {
-            sb.append("Student not found or already deleted");
-        }
-
-        return sb.toString();
-    }
+    
+    public StudentEntity update(int id, StudentEntity newStudent) throws Exception {
+		StudentEntity student = new StudentEntity();
+		try {
+			//steps in updating
+			//step 1 - search the id number of the student
+			student = studentRepository.findById(id).get();
+			
+			//step 2 - update the record
+			student.setFirstName(newStudent.getFirstName());
+			student.setMiddleName(newStudent.getMiddleName());
+			student.setLastName(newStudent.getLastName());
+			student.setEmail(newStudent.getEmail());
+			student.setContactNumber(newStudent.getContactNumber());
+			
+			//Step 3 - save the information and return the value
+			return studentRepository.save(student);
+		}catch(NoSuchElementException nex) {
+			throw new Exception("ID Number " + id + " does not exist!");
+		}
+	}
+    
+    public String deleteById(int id) {
+		String msg;
+		if(studentRepository.findById(id).isEmpty()) {
+			msg = "Student deleted";
+		}
+		else {
+			studentRepository.deleteById(id);
+			msg = "Student not found or already deleted";
+		}
+			
+		return msg;
+	}
 
 
 }
