@@ -22,6 +22,8 @@ import "@fontsource/mulish";
 import EntityCount from '../../Components/Papers/EntityCount';
 import UniversityTable from '../../Components/Tables/UniversityTable';
 import UniversitySearchBar from '../../Components/SearchBar/UniversitySearchBar';
+import { useContext, useEffect } from 'react';
+import { RestContext } from '../../Components/Helpers/RestContext';
 
 function Copyright(props: any) {
   return (
@@ -90,12 +92,18 @@ const mdTheme = createTheme();
 
 function DashboardContent() {
   const [open, setOpen] = React.useState(false);
+  const rest = useContext(RestContext);
+
+  useEffect(()=>{
+    rest?.getStatistics({ method:'GET', url:"http://localhost:8080/university/statistic" })
+  },[rest?.renderer])
+
   const toggleDrawer = () => {
     setOpen(!open);
   };
 
   return (
-    <ThemeProvider theme={mdTheme}>
+    <ThemeProvider theme={mdTheme} >
       <Box sx={{ display: 'flex' }}>
         <CssBaseline />
         <AppBar position="absolute" open={open}>
@@ -178,16 +186,16 @@ function DashboardContent() {
           <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
             <Grid container spacing={3}>
               <Grid item xs={3}>
-                <EntityCount name="Universities" count="60"/>
+                <EntityCount name="Universities" count={rest?.statistics?.universityCount + ""}/>
               </Grid>
               <Grid item xs={3}>
-                <EntityCount name="Teachers" count="75"/>
+                <EntityCount name="Teachers" count={rest?.statistics?.teacherCount + ""}/>
               </Grid>
               <Grid item xs={3}>
-                <EntityCount name="Courses" count="83"/>
+                <EntityCount name="Courses" count={rest?.statistics?.courseCount + ""}/>
               </Grid>
               <Grid item xs={3}>
-                <EntityCount name="Students" count="2,264"/>
+                <EntityCount name="Students" count={rest?.statistics?.studentCount + ""}/>
               </Grid>
               <Grid item xs={12}>
                 <UniversityTable/>

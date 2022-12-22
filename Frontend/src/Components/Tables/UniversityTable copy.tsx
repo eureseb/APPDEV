@@ -13,11 +13,8 @@ import { Grid } from '@mui/material';
 import CSS from 'csstype';
 import UniversitySearchBar from '../SearchBar/UniversitySearchBar';
 import { useRestUniversity } from '../../Services/useREST';
-import { TableContext } from '../Helpers/TableContext';
-import { useContext } from 'react';
-import { RestContext } from '../Helpers/RestContext';
 
-export interface Column {
+interface Column {
   id: 'id' | 'name' | 'details' | 'date' ;
   label: string;
   minWidth?: number;
@@ -47,13 +44,11 @@ const columns: readonly Column[] = [
   },
 ];
 
-export interface Data {
+interface Data {
   id: string;
   name: string;
   details: string;
   date: string;
-  lastUpdated:string;
-  hours:string;
 }
 
 function createData(
@@ -61,49 +56,50 @@ function createData(
   name: string,
   details: string,
   date: string,
-  lastUpdated:string,
-  hours:string
 ): Data {
-  return { id: id, name: name, details: details, date: date, lastUpdated:lastUpdated, hours:hours};
+  return { id: id, name: name, details: details, date: date };
 }
+
+const [putUniversity,sendRequestUni,deleteUniversity,postUniversity,deleted,uniData,error,loading,success,renderer,post,put] = useRestUniversity();
+  let row:Data[]=[];
+
+  React.useEffect(()=>{
+    if(!uniData){
+      sendRequestUni(
+        {
+        method:'GET',
+        url:"http://localhost:8080/university"
+        }
+        )
+    }
+  },[])
+
+  uniData?.map((item)=>{
+    row.push(createData(item.id+"",item.name,item.details,item.dateAdded))
+  })
+
+const rows = [
+  createData('1', 'Cebu Institute of Technology - University', "non-sectarian academic institution in Cebu City, Philippines", '3287263'),
+  createData('2', 'University of the Visayas', 'first school in the province of Cebu to attain university status', '9596961'),
+  createData('3', 'University of Cebu', 'private, non-sectarian, coeducational basic and higher education institution in Cebu City, Philippines', '301340'),
+  createData('4', 'University of San Carlos', 'private Catholic University situated in the oldest city in the Philippines, Cebu City', '9833520'),
+  createData('5', 'Southwestern University - PHINMA', 'Founded and opened in the summer of 1946 by two pharmacists; achieved university status on December 11, 1959.', '9984670'),
+  createData('6', 'Cebu Technological University', 'public, non-sectarian, coeducational state-funded higher education institution located in Cebu, Philippines.', '7692024'),
+  createData('7', 'University of San Jose-Recoletos', 'private Catholic academic institution run by the Order of Augustinian Recollects in Cebu City, Philippines.', '357578'),
+  createData('8', 'Cebu Eastern College', 'a Chinese Filipino school at the corner of Dimasalang and Leon Kilat in Cebu City, Philippines.', '70273'),
+  createData('9', 'Cebu City National Science High School', ' commonly known as Sci-Hi or Science High, is one of the pioneering science schools in Cebu City, Philippines. ', '1972550'),
+  createData('10', 'Velez College', ' private educational institution in Cebu City, Cebu, widely known for offering allied health degrees.', '377973'),
+];
 
 export default function StickyHeadTable() {
   const [page, setPage] = React.useState(0);
   const [text, setText] = React.useState("");
-  const [render, setRender] = React.useState(false);
   const [rowsPerPage, setRowsPerPage] = React.useState(4);
-  const rest = useContext(RestContext);
-  const test = useContext(TableContext)
-  let rows:Data[]=[];
-
-  React.useEffect(()=>{
-    setPage(0)
-    filterCreateData(text)
-  },[text])
-
-  React.useEffect(()=>{
-    rest?.sendRequestUni({ method:'GET', url:"http://localhost:8080/university" })
-  },[rest?.renderer])
-
-
-  rest?.uniData?.map((item)=>{
-    rows.push(createData(item.id+"",item.name,item.details,item.dateAdded,item.lastUpdated,item.hours))
-  })
-  
-  const filterCreateData = (prop:string) => {
-    rows.map((item)=>{
-      if(item.name == prop || item.id == prop){
-        rows.length = 0;
-        rows.push(createData(item.id+"",item.name,item.details,item.date,item.lastUpdated,item.hours));
-        console.log(rows)
-      }
-    })
-  }
 
   const handleChangeInput = (event: React.ChangeEvent<HTMLInputElement>) => {
     //console.log(event.target.value);
     setText(event.target.value + "");
-  }
+}
 
   const handleChangePage = (event: unknown, newPage: number) => {
     setPage(newPage);
@@ -143,29 +139,27 @@ const FontStyling: CSS.Properties = {
     <Paper sx={{ width: '100%', overflow: 'hidden', padding:"10px", paddingTop:"20px" }}>
       <Grid container spacing={3}>
         <Grid item xs={3}> 
-        <img src="./Images/plusbtn.png" style={{ 
-          float: "left", 
-          height: "80px", 
-          width: "80px",
-          padding: "10px",
-          marginBottom:"10px",
-          cursor:"url(), pointer"}} 
-          onClick={(e) => {
+        <img src="./Images/plusbtn.png" style={{ float: "left", 
+        height: "80px", 
+        width: "80px",
+        padding: "10px",
+        marginBottom:"10px",
+        cursor:"url(), pointer"}} 
+        onClick={(e) => {
           e.preventDefault();
-          window.location.href='http://localhost:3000/university';
+          window.location.href='http://localhost:3000/dashboard';
           }}/>
-        <div style={{fontFamily: 
-          "Mulish",
-          padding: "10px",
-          paddingTop: "30px",
-          paddingRight: "35px",
-          fontWeight: "bold",
-          color: "black"
+        <div style={{fontFamily: "Mulish",
+        padding: "10px",
+        paddingTop: "30px",
+        paddingRight: "35px",
+        fontWeight: "bold",
+        color: "black"
         }}>All Universities</div>
         </Grid>
         <Grid item xs={8} style={{margin:"auto"}}>
-            <Grid item xs={4}>
-                <div style={FontStyling}>Name / Id</div>
+           <Grid item xs={4}>
+                <div style={FontStyling}>Name</div>
             </Grid>
             <Grid item xs={8}>
               <input style={InputStyling} type="text" onChange={handleChangeInput}></input> 
@@ -192,8 +186,7 @@ const FontStyling: CSS.Properties = {
             </TableRow>
           </TableHead>
           <TableBody>
-            <UniversityRow rows={rows} page={page} rowsPerPage={rowsPerPage} columns={columns} 
-              text={text} />
+   
           </TableBody>
         </Table>
       </TableContainer>

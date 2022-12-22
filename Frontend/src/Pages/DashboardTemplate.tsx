@@ -17,19 +17,10 @@ import Link from '@mui/material/Link';
 import MenuIcon from '@mui/icons-material/Menu';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import NotificationsIcon from '@mui/icons-material/Notifications';
+import { mainListItems, secondaryListItems } from './Dashboard/listItems';
 import "@fontsource/mulish";
-import EntityCount from '../../Components/Papers/EntityCount';
-import UniversityTable from '../../Components/Tables/UniversityTable';
-import UniversitySearchBar from '../../Components/SearchBar/UniversitySearchBar';
-import { mainListItems, secondaryListItems } from '../Dashboard/listItems';
-import AddUniversity from '../../Components/Papers/AddUniversity';
-import RemoveUniversity from '../../Components/Papers/RemoveUniversity';
-import UpdateUniversity from '../../Components/Papers/UpdateUniversity';
-import TableContextProvider from '../../Components/Helpers/TableContext';
-import RestContextProvider from '../../Components/Helpers/RestContext';
-import DeleteContextProvider, { DeleteContext } from '../../Components/Helpers/DeleteContext';
-import AddContextProvider from '../../Components/Helpers/AddContext';
-import UpdateContextProvider from '../../Components/Helpers/UpdateContext';
+import { useContext, useEffect } from 'react';
+import Home from '../Services/Home';
 
 function Copyright(props: any) {
   return (
@@ -96,14 +87,15 @@ const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' 
 
 const mdTheme = createTheme();
 
-function DashboardContent() {
+function DashboardContent(props:{children:React.ReactNode}) {
   const [open, setOpen] = React.useState(false);
+
   const toggleDrawer = () => {
     setOpen(!open);
   };
 
   return (
-    <ThemeProvider theme={mdTheme}>
+    <ThemeProvider theme={mdTheme} >
       <Box sx={{ display: 'flex' }}>
         <CssBaseline />
         <AppBar position="absolute" open={open}>
@@ -164,7 +156,6 @@ function DashboardContent() {
               <ChevronLeftIcon />
             </IconButton>
           </Toolbar>
-          
           <List component="nav">
             {mainListItems}
             <Divider sx={{ my: 1 }} />
@@ -184,43 +175,20 @@ function DashboardContent() {
           }}
         >
           <Toolbar />
-
           <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
-            <Grid container spacing={3}>
-              <Grid item xs={12}>
-                  <UniversityTable/>
-              </Grid>
-              <Grid item xs={6} sx={{margin:"auto"}}>
-                <AddContextProvider>
-                  <AddUniversity/> 
-                </AddContextProvider>    
-              </Grid>
-              <Grid item xs={6}>
-                <Grid container spacing={3}>
-                  <Grid item xs={12}>
-                    <DeleteContextProvider>
-                      <RemoveUniversity/>
-                    </DeleteContextProvider>
-                  </Grid>
-                  <Grid item xs={12}>
-                    <UpdateContextProvider>
-                      <UpdateUniversity/>
-                    </UpdateContextProvider>
-                  </Grid>
-                </Grid>
-              </Grid>
-              
-            </Grid>
+           {props.children}
             <Copyright sx={{ pt: 4 }} />
           </Container>
-
         </Box>
       </Box>
     </ThemeProvider>
-    
   );
 }
 
-export default function Dashboard() {
-  return <DashboardContent />;
+export default function Dashboard(props:{children:React.ReactNode}) {
+  return (
+  <DashboardContent>
+    {props.children}
+    </DashboardContent>
+  );
 }

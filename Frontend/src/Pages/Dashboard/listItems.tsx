@@ -50,7 +50,10 @@ export const mainListItems = (
       <ListItemIcon>
         <LayersIcon />
       </ListItemIcon>
-      <ListItemText primary="Courses" />
+      <ListItemText primary="Courses" onClick={(e) => {
+                e.preventDefault();
+                window.location.href='http://localhost:3000/course';
+                }}/>
     </ListItemButton>
   </React.Fragment>
 );
@@ -70,7 +73,10 @@ export const secondaryListItems = (
       <ListItemIcon>
         <LogoutIcon />
       </ListItemIcon>
-      <ListItemText primary="Log-out" />
+      <ListItemText primary="Log-out" onClick={(e) => {
+                e.preventDefault();
+                window.location.href='http://localhost:3000/login';
+                }}/>
     </ListItemButton>
   </React.Fragment>
 );
