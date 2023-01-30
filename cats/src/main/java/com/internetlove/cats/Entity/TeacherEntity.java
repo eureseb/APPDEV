@@ -20,10 +20,7 @@ public class TeacherEntity {
 	private String gender;
 	private String course;
 	
-	
-	public TeacherEntity() {
-		
-	}
+	public TeacherEntity() {}
 
 	public TeacherEntity(int teacherid, String name, String contactNumber, String gender, String course) {
 		super();

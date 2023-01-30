@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.internetlove.cats.Entity.TeacherEntity;
+import com.internetlove.cats.Entity.UniversityEntity;
 import com.internetlove.cats.Repository.TeacherRepository;
 
 @Service
@@ -15,8 +16,16 @@ public class TeacherService {
 
 	@Autowired
 	TeacherRepository trepo;
+	@Autowired
+	UniversityService userv;
 	
-	public TeacherEntity postTeacher(TeacherEntity teacher) {
+	public TeacherEntity postTeacher(TeacherEntity teacher, int id) throws Exception{
+		try {
+    	UniversityEntity uniEntity = userv.getUniversityById(id);
+    	uniEntity.setTeachers(teacher);
+    	}catch(NoSuchElementException nex) {
+			throw new Exception("ID Number " + id + " does not exist!");
+		}
 		return trepo.save(teacher);
 	}
 	

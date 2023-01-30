@@ -29,8 +29,8 @@ public class StudentController {
     }
 
     @PostMapping
-    public StudentEntity saveStudent(@Validated @RequestBody StudentEntity studentEntity) {
-        return studentService.insertStudent(studentEntity);
+    public StudentEntity saveStudent(@RequestParam int id, @RequestBody StudentEntity studentEntity) throws Exception {
+        return studentService.insertStudent(studentEntity, id);
     }
 
     @DeleteMapping("/{id}")

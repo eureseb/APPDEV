@@ -2,7 +2,6 @@ package com.internetlove.cats.Service;
 
 import java.util.List;
 import java.util.NoSuchElementException;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -17,6 +16,17 @@ public class UniversityService {
 	//Get all universities
 	public List<UniversityEntity> getUniversities(){
 		return urepo.findAll();
+	}
+	
+	//Find by id
+	public UniversityEntity getUniversityById(int id) throws Exception{
+		UniversityEntity uni = new UniversityEntity();
+		try {
+			uni = urepo.findById(id).get();
+		}catch(NoSuchElementException nex) {
+			throw new Exception("ID Number " + id + " does not exist!");
+		}
+		return uni;
 	}
 	
 	//Find by name

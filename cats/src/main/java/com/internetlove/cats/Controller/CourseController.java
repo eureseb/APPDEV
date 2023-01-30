@@ -25,32 +25,32 @@ public class CourseController {
 	@Autowired
 	CourseService cserv;
 	
-	@PostMapping("/postCourse")
-	public CourseEntity postCourse(@RequestBody CourseEntity course) {
-		return cserv.postCourse(course);
+	@PostMapping
+	public CourseEntity postCourse(@RequestParam int id, @RequestBody CourseEntity course) throws Exception{
+		return cserv.postCourse(course, id);
 	}
 	
-	@GetMapping("/getAllCourses")
+	@GetMapping
 	public List<CourseEntity> getAllCourses() {
 		return cserv.getAlllCourses();
 	}
 	
-	@GetMapping("/getCourseById")
+	@GetMapping("/id")
 	public CourseEntity getCourseById(int id) {
 		return cserv.getCourseById(id);
 	}
 	
-	@GetMapping("/getCourseByCode")
+	@GetMapping("/code")
 	public CourseEntity getCourseByCode(String code) {
 		return cserv.getCourseByCode(code);
 	}
 	
-	@PutMapping("/putCourse")
+	@PutMapping
 	public CourseEntity putCourse(@RequestParam int courseid, @RequestBody CourseEntity updatedCourse) throws Exception {
 		return cserv.putCourse(courseid, updatedCourse);
 	}
 	
-	@DeleteMapping("/deleteCourse/{courseid}")
+	@DeleteMapping("/{courseid}")
 	public String deleteCourse(@PathVariable int courseid) {
 		return cserv.deleteCourse(courseid);
 	}

@@ -24,12 +24,12 @@ public class TeacherController {
 	@Autowired
 	TeacherService teserv;
 	
-	@PostMapping("/postTeacher")
-	public TeacherEntity postTeacher(@RequestBody TeacherEntity teacher) {
-		return teserv.postTeacher(teacher);
+	@PostMapping
+	public TeacherEntity postTeacher(@RequestParam int id, @RequestBody TeacherEntity teacher) throws Exception{
+		return teserv.postTeacher(teacher, id);
 	}
 	
-	@GetMapping("/getAllTeachers")
+	@GetMapping
 	public List<TeacherEntity> getAllTeachers(){
 		return teserv.getAllTeachers();
 	}

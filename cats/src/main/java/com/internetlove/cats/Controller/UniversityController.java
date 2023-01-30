@@ -30,6 +30,11 @@ public class UniversityController {
 		return userv.getUniversities();
 	}
 	
+	@GetMapping("/{id}")
+	public UniversityEntity getUniversityById(@PathVariable int id) throws Exception{
+		return userv.getUniversityById(id);
+	}
+	
 	@PostMapping("")
 	public UniversityEntity postUniversity(@RequestBody UniversityEntity university) {
 		return userv.insertUniversity(university);

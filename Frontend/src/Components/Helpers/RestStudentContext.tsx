@@ -113,13 +113,12 @@ export default function RestStudentContextProvider(props:{children:React.ReactNo
 
     function postStudent(iuser:IStudent){
         setLoading(true);
-        axios.post("http://localhost:8080/students",{
+        axios.post("http://localhost:8080/students?id="+iuser.uid,{
             firstName:iuser.fname,
             middleName:iuser.mname,
             lastName:iuser.lname,
             email:iuser.email,
-            contactNumber:iuser.cn,
-            uniId:iuser.uid
+            contactNumber:iuser.cn
         }
         )
         .then((response)=>{

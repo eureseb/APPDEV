@@ -35,8 +35,6 @@ public class UniversityEntity {
 	@JoinColumn(name = "uniId")
 	private Set<StudentEntity> students;
 	
-	//private Set<TeacherEntity> teachers;
-	//private Set<StudentEntity> students;
 	public UniversityEntity() {}
 	
 	public UniversityEntity(int id, String name, String details, String dateAdded, Set<CourseEntity> courses,
@@ -91,6 +89,10 @@ public class UniversityEntity {
 	public void setCourses(Set<CourseEntity> courses) {
 		this.courses = courses;
 	}
+	
+	public void setCourses(CourseEntity courses) {
+		this.courses.add(courses);
+	}
 
 	public Set<TeacherEntity> getTeachers() {
 		return teachers;
@@ -99,6 +101,10 @@ public class UniversityEntity {
 	public void setTeachers(Set<TeacherEntity> teachers) {
 		this.teachers = teachers;
 	}
+	
+	public void setTeachers(TeacherEntity teachers) {
+		this.teachers.add(teachers);
+	}
 
 	public Set<StudentEntity> getStudents() {
 		return students;
@@ -106,6 +112,10 @@ public class UniversityEntity {
 
 	public void setStudents(Set<StudentEntity> students) {
 		this.students = students;
+	}
+	
+	public void setStudents(StudentEntity students) {
+		this.students.add(students);
 	}
 	
 }

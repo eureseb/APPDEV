@@ -6,7 +6,6 @@ import com.internetlove.cats.Repository.StudentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import javax.swing.text.html.Option;
 import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Optional;
@@ -16,6 +15,8 @@ public class StudentService {
 
     @Autowired
     StudentRepository studentRepository;
+    @Autowired
+    UniversityService userv;
 
     public List<StudentEntity> getAllStudents(){ return studentRepository.findAll(); }
 
@@ -32,7 +33,13 @@ public class StudentService {
         return student;
     }
 
-    public StudentEntity insertStudent(StudentEntity student){
+    public StudentEntity insertStudent(StudentEntity student, int id) throws Exception{
+    	try {
+    	UniversityEntity uniEntity = userv.getUniversityById(id);
+    	uniEntity.setStudents(student);
+    	}catch(NoSuchElementException nex) {
+			throw new Exception("ID Number " + id + " does not exist!");
+		}
         return studentRepository.save(student);
     }
     

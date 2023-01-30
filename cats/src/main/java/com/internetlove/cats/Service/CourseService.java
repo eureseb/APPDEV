@@ -7,15 +7,24 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.internetlove.cats.Entity.CourseEntity;
+import com.internetlove.cats.Entity.UniversityEntity;
 import com.internetlove.cats.Repository.CourseRepository;
 
 @Service
 public class CourseService {
 	@Autowired
 	CourseRepository crepo;
+	@Autowired
+	UniversityService userv;
 	
 	//Create
-	public CourseEntity postCourse(CourseEntity course) {
+	public CourseEntity postCourse(CourseEntity course, int id) throws Exception{
+		try {
+    	UniversityEntity uniEntity = userv.getUniversityById(id);
+    	uniEntity.setCourses(course);
+    	}catch(NoSuchElementException nex) {
+			throw new Exception("ID Number " + id + " does not exist!");
+		}
 		return crepo.save(course);
 	}
 	
